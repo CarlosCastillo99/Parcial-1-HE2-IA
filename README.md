@@ -105,5 +105,5 @@ Este proyecto está bajo la Licencia MIT. Para más detalles, consulta el archiv
 
 ---
 
-Este proyecto fue desarrollado como parte de un trabajo de Inteligencia Artificial aplicada a la economía. Para cualquier pregunta o sugerencia, no dudes en contactar al autor.
+
 
