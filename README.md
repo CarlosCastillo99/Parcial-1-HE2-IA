@@ -1,109 +1,123 @@
-# Proyecto de Predicción de Diabetes en Población Indígena Pima
+# **Clasificación de Diabetes Tipo 2 - Dataset Pima Indians **
 
-Este repositorio contiene un proyecto de análisis y predicción de diabetes en la población indígena Pima utilizando técnicas de aprendizaje automático. El objetivo principal es identificar los factores más relevantes asociados con la presencia de diabetes y construir modelos predictivos para facilitar el diagnóstico temprano de la enfermedad.
+## **Descripción del Proyecto**
+Este proyecto utiliza **Machine Learning** para predecir la presencia de **diabetes tipo 2** en mujeres de la comunidad **Pima Indians** utilizando un conjunto de datos de **Kaggle**. Se implementaron modelos de clasificación avanzados junto con técnicas de balanceo de clases como **SMOTE** para mejorar la precisión en la detección de casos positivos (diabetes).
 
-## Objetivos del Proyecto
+El enfoque principal es optimizar las métricas de **Recall Weighted** y **AUC-ROC** para minimizar los **falsos negativos**, ya que en el contexto médico es crucial detectar correctamente los casos positivos.
 
-El proyecto tiene los siguientes objetivos:
+---
 
-1. **Análisis Exploratorio de Datos (EDA):** Realizar un análisis descriptivo de las variables médicas y demográficas para comprender su distribución, correlaciones y posibles relaciones con la variable objetivo (*Outcome*).
-2. **Preprocesamiento de Datos:** Manejar valores faltantes, escalar características y balancear el conjunto de datos utilizando técnicas como SMOTE.
-3. **Modelado Predictivo:** Entrenar y evaluar varios modelos de clasificación para predecir la presencia de diabetes en pacientes.
-4. **Evaluación de Modelos:** Comparar el rendimiento de los modelos utilizando métricas como precisión, *recall*, F1-Score y AUC-ROC.
+## **Objetivo del Proyecto**
+El objetivo principal es desarrollar un modelo de clasificación robusto para predecir diabetes tipo 2, utilizando un enfoque **end-to-end** que incluye:
+- Análisis Exploratorio de Datos (EDA) para entender las características y distribuciones de las variables.
+- Preprocesamiento de datos, incluyendo manejo de valores atípicos y datos faltantes.
+- Balanceo de clases con **SMOTE** para mejorar el rendimiento en la clase minoritaria.
+- Entrenamiento y evaluación de varios modelos de clasificación.
+- Análisis de métricas avanzadas como **Log Loss** y **Entropía** para evaluar la certeza de las predicciones.
 
-## Dataset
+---
 
-El conjunto de datos utilizado es el **Pima Indians Diabetes Database**, que contiene información médica de mujeres indígenas Pima mayores de 21 años. Las variables incluyen:
+## **Dataset**
+- **Fuente:** [Kaggle - Pima Indians Diabetes Database](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database)
+- **Descripción:**
+  - 768 observaciones con 9 variables predictoras y una variable objetivo (`Outcome`).
+  - Variables predictoras incluyen:
+    - `Pregnancies`: Número de embarazos.
+    - `Glucose`: Concentración de glucosa en sangre.
+    - `BloodPressure`: Presión arterial diastólica.
+    - `SkinThickness`: Grosor del pliegue cutáneo.
+    - `Insulin`: Niveles de insulina en suero.
+    - `BMI`: Índice de Masa Corporal.
+    - `DiabetesPedigreeFunction`: Antecedentes familiares de diabetes.
+    - `Age`: Edad.
+  - `Outcome`: Variable objetivo binaria (0 = No Diabetes, 1 = Diabetes).
 
-- **Pregnancies:** Número de embarazos.
-- **Glucose:** Nivel de glucosa en sangre (mg/dL).
-- **BloodPressure:** Presión arterial diastólica (mm Hg).
-- **SkinThickness:** Espesor del pliegue cutáneo del tríceps (mm).
-- **Insulin:** Nivel de insulina en suero (mu U/ml).
-- **BMI:** Índice de Masa Corporal (peso en kg / altura en m²).
-- **DiabetesPedigreeFunction:** Función de pedigrí de diabetes (probabilidad de desarrollar diabetes).
-- **Age:** Edad en años.
-- **Outcome:** Diagnóstico de diabetes (0 = No, 1 = Sí).
+---
 
-## Modelos Utilizados
+## **Modelos de Clasificación Utilizados**
+Se evaluaron y compararon los siguientes algoritmos de clasificación:
+- **Regresión Logística (Ridge y Lasso)**
+- **SVM (Support Vector Machine)**
+- **Árbol de Decisión (Decision Tree)**
+- **Random Forest**
+- **XGBoost**
+- **K-Nearest Neighbors (KNN)**
 
-Se entrenaron y evaluaron los siguientes modelos de clasificación:
+---
 
-- Regresión Logística
-- SVM (Máquinas de Vectores de Soporte)
-- Random Forest
-- XGBoost
-- KNN (Vecinos más Cercanos)
+## **Metodología**
+### **1. Análisis Exploratorio de Datos (EDA)**
+- Análisis de distribuciones y correlaciones.
+- Identificación de valores atípicos y datos faltantes.
+- Visualización de relaciones entre variables predictoras y la variable objetivo.
 
-## Requisitos
+### **2. Preprocesamiento de Datos**
+- **Imputación de datos faltantes** en `BloodPressure`, `SkinThickness` e `Insulin` utilizando la **media**.
+- **Estandarización** de variables con `StandardScaler()` para mejorar el rendimiento de modelos basados en distancia.
 
-Para ejecutar este proyecto en tu máquina local, asegúrate de tener las siguientes librerías instaladas:
+### **3. Balanceo de Clases con SMOTE**
+- Aplicación de **SMOTE** para balancear las clases en el conjunto de entrenamiento.
+- Comparación de métricas antes y después de aplicar SMOTE para evaluar el impacto en el rendimiento de los modelos.
 
+### **4. Evaluación de Modelos**
+- **Métricas Tradicionales:**
+  - `Accuracy`, `Precision`, `Recall`, `F1-Score`.
+- **Métricas Avanzadas:**
+  - `AUC-ROC`: Para evaluar la capacidad discriminativa de los modelos.
+  - `Log Loss`: Para medir la incertidumbre en las probabilidades predichas.
+  - `Entropía`: Para analizar la certeza de las predicciones.
+
+### **5. Visualización de Resultados**
+- **Curvas ROC** para comparar la capacidad de discriminación de los modelos.
+- **Gráficos de barras** para comparar métricas tradicionales.
+- **Distribución de Entropía** para evaluar la incertidumbre de las predicciones.
+
+---
+
+## **Resultados y Análisis**
+- **Mejor modelo antes de SMOTE:** `KNN` con **Recall Weighted = 0.753**.
+- **Mejor modelo después de SMOTE:** `Random Forest` con **AUC-ROC = 0.823** y **Log Loss = 0.483**.
+- **Impacto de SMOTE:**
+  - Mejoró el rendimiento en Recall para la clase minoritaria (Diabetes).
+  - Disminuyó la entropía y la incertidumbre en las predicciones de casi todos los modelos.
+- **Entropía:**
+  - `Decision Tree` mostró la menor entropía pero puede estar **sobreajustado**.
+  - `XGBoost` y `KNN` mantuvieron un buen balance entre certeza e incertidumbre.
+
+---
+
+## **Conclusiones y Recomendaciones**
+- **Random Forest** es el modelo más robusto para predecir diabetes tipo 2 en este dataset, mostrando una excelente capacidad discriminativa.
+- **SMOTE** mejoró significativamente el rendimiento en la clase minoritaria, destacando la importancia del balance de clases en problemas de clasificación médica.
+- Se recomienda ajustar umbrales de decisión en **XGBoost** y **KNN** para optimizar la precisión en escenarios con mayor incertidumbre.
+- Considerar el uso de **CalibratedClassifierCV** para mejorar las probabilidades en **SVM** y reducir la entropía indefinida.
+
+---
+
+## **Requisitos de Instalación**
+Para ejecutar este proyecto, asegúrate de tener instaladas las siguientes bibliotecas:
 ```bash
-pip install numpy pandas scikit-learn xgboost imbalanced-learn matplotlib seaborn ydata_profiling
+pip install numpy pandas scikit-learn xgboost imbalanced-learn matplotlib seaborn
 ```
+---
+## Autores
+- **Carlos Castillo** - Autor principal
+- **Jennifer Sanabria** - Autor principal
+- **Juan Saldaña** - Autor principal
+- **Ángela Torres** - Autor principal
 
-## Cómo Ejecutar el Proyecto
-
-1. **Clonar el Repositorio:**
-
-   ```bash
-   git clone https://github.com/tu-usuario/nombre-del-repositorio.git
-   cd nombre-del-repositorio
-   ```
-
-2. **Ejecutar el Cuaderno de Colab:**
-
-   Abre el archivo `Copia_de_Monitoria_Parcial1.ipynb` en Google Colab o en tu entorno local con Jupyter Notebook.
-
-3. **Preprocesamiento y Modelado:**
-
-   Sigue los pasos detallados en el cuaderno para realizar el análisis exploratorio, preprocesamiento de datos, entrenamiento de modelos y evaluación.
-
-## Ejemplos de Uso
-
-### Análisis Exploratorio
-
-El análisis exploratorio incluye:
-
-- Visualización de la distribución de variables.
-- Detección de valores atípicos.
-- Matriz de correlación para identificar relaciones entre variables.
-
-### Preprocesamiento
-
-- **Imputación de Valores Faltantes:** Se reemplazan los valores faltantes en variables como `BloodPressure`, `SkinThickness`, `Insulin` y `BMI` con la media de la columna.
-- **Escalado de Características:** Se aplica `StandardScaler` para normalizar las variables.
-- **Balanceo de Clases:** Se utiliza SMOTE para generar ejemplos sintéticos de la clase minoritaria (diabetes).
-
-### Modelado y Evaluación
-
-- **Entrenamiento de Modelos:** Se entrenan varios modelos de clasificación utilizando `GridSearchCV` para optimizar hiperparámetros.
-- **Evaluación:** Se comparan los modelos utilizando métricas como precisión, *recall*, F1-Score y AUC-ROC.
-
-## Resultados
-
-Los resultados del proyecto incluyen:
-
-- **Comparación de Métricas:** Se presenta una comparación de las métricas de rendimiento para cada modelo.
-- **Curva ROC:** Se grafica la curva ROC para evaluar la capacidad de discriminación de los modelos.
-- **Log Loss:** Se calcula la entropía cruzada para evaluar la calidad de las predicciones probabilísticas.
-
-## Contribuciones
-
-Si deseas contribuir a este proyecto, por favor sigue estos pasos:
-
-1. Haz un fork de este repositorio.
-2. Crea una nueva rama (`git checkout -b feature-nueva`).
-3. Realiza tus cambios y haz commit de ellos (`git commit -am 'Agrega nueva funcionalidad'`).
-4. Envía tus cambios al repositorio remoto (`git push origin feature-nueva`).
-5. Abre un pull request.
+---
 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Para más detalles, consulta el archivo `LICENSE`.
 
 ---
+
+## Referencias
+- **Dataset**: [Kaggle - Pima Indians Diabetes Database](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database)
+- **SMOTE**: Chawla et al. (2002). *"SMOTE: Synthetic Minority Over-sampling Technique"*.
+- **XGBoost**: Chen & Guestrin (2016). *"XGBoost: A Scalable Tree Boosting System"*.
 
 
 
