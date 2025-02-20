@@ -1,4 +1,4 @@
-# **Clasificación de Diabetes Tipo 2 - Dataset Pima Indians **
+# **Clasificación de Diabetes Tipo 2 - Dataset Pima Indians**
 
 ## **Descripción del Proyecto**
 Este proyecto utiliza **Machine Learning** para predecir la presencia de **diabetes tipo 2** en mujeres de la comunidad **Pima Indians** utilizando un conjunto de datos de **Kaggle**. Se implementaron modelos de clasificación avanzados junto con técnicas de balanceo de clases como **SMOTE** para mejorar la precisión en la detección de casos positivos (diabetes).
